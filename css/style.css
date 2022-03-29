@@ -1,0 +1,10 @@
+@charset "utf-8";
+h1 {
+    color: red;
+    background-color: pink;
+    text-align: center;
+    border-bottom: double 3px;
+}
+.error {
+    color: red;
+}
