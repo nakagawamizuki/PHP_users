@@ -8,3 +8,10 @@ h1 {
 .error {
     color: red;
 }
+.success {
+    color: green;
+    border-bottom: double 3px;
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}

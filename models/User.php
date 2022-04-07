@@ -1,13 +1,16 @@
 <?php
+    require_once 'models/Model.php';
     // モデル(Model)
     // 会員の設計図作成
-    class User {
+    class User  extends Model{
         // プロパティ
+        public $id; //ID
         public $name; // 名前
         public $age; //年齢
         public $gender; //性別
+        public $created_at; //登録日時
         // コンストラクタ
-        public function __construct($name, $age, $gender){
+        public function __construct($name='', $age='', $gender=''){
             // プロパティの初期化
             // this.name = name;
             $this->name = $name;
@@ -51,6 +54,41 @@
             }
             
             return $errors;
+        }
+        
+        // データベースの全データを取得するメソッド
+        public static function all(){
+            try {
+                $pdo = self::get_connection();
+                $stmt = $pdo->query('SELECT * FROM users ORDER BY id DESC');
+                // フェッチの結果を、Userクラスのインスタンスにマッピングする
+                $stmt->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, 'User');
+                $users = $stmt->fetchAll();
+                self::close_connection($pdo, $stmt);
+                // Userクラスのインスタンスの配列を返す
+                return $users;
+            } catch (PDOException $e) {
+                return 'PDO exception: ' . $e->getMessage();
+            }
+        }
+        
+        // データを1件登録するメソッド
+        public function save(){
+            try {
+                $pdo = self::get_connection();
+                $stmt = $pdo->prepare("INSERT INTO users (name, age, gender) VALUES (:name, :age, :gender)");
+                // バインド処理
+                $stmt->bindParam(':name', $this->name, PDO::PARAM_STR);
+                $stmt->bindParam(':age', $this->age, PDO::PARAM_INT);
+                $stmt->bindParam(':gender', $this->gender, PDO::PARAM_STR);
+                // 実行
+                $stmt->execute();
+                self::close_connection($pdo, $stmt);
+                return "新規ユーザー登録が成功しました。";
+                
+            } catch (PDOException $e) {
+                return 'PDO exception: ' . $e->getMessage();
+            }
         }
     }
     

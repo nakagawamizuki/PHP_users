@@ -1,11 +1,7 @@
 <?php
     //(c)
     require_once 'models/User.php';
-    // セッション開始(すべてのファイルで共通して使える情報の保存箱)
-    session_start();
-    // $_POSTはページ間をまたいで飛んでくる連想配列
-    // スーパーグローバル変数　$_
-    // var_dump($_POST);
+    require_once 'filters/csrf_filter.php';
     $name = $_POST['name'];
     $age = $_POST['age'];
     $gender = $_POST['gender'];
@@ -20,11 +16,15 @@
     // 入力エラーが一つもなければ
     if(count($errors) === 0){
        // $user情報をDBに保存する 
-       print 'OK';
+       $flush = $user->save();
+       $_SESSION['flush'] = $flush;
+       header('Location: index.php');
+       exit;
     }else{
         // 入力画面の戻りたい
         // セッションにエラーメッセージを保存
         $_SESSION['errors'] = $errors;
+        $_SESSION['user'] = $user;
         // リダイレクト(C)->(C)
         header('Location: create.php');
         exit;

@@ -16,9 +16,10 @@
             </ul>
             <?php endif; ?>
             <form action="store.php" method="POST">
-                名前: <input type="text" name="name"><br>
-                年齢: <input type="text" name="age"><br>
-                性別: <input type="radio" name="gender" value="male" checked>男性 <input type="radio" name="gender" value="female">女性<br>
+                <input type="hidden" name="_token" value="<?= $token ?>">
+                名前: <input type="text" name="name" value="<?= $user->name ?>"><br>
+                年齢: <input type="text" name="age" value="<?= $user->age ?>"><br>
+                性別: <input type="radio" name="gender" value="male" <?= $user->gender === '' || $user->gender === 'male' ? 'checked' : '' ?>>男性 <input type="radio" name="gender" value="female" <?= $user->gender === 'female' ? 'checked' : '' ?>>女性<br>
                 <button type="submit">登録</button>
             </form>
         </div>

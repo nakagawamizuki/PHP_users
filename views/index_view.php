@@ -7,6 +7,9 @@
     <body>
         <!--ビュー(view)-->
         <h1>会員一覧</h1>
+        <?php if($flush !== null): ?>
+        <h2 class="success"><?= $flush ?></h2>
+        <?php endif; ?>
         <p>会員人数: <?= count($users) ?>人</p>
         <?php foreach($users as $user): ?>
         <ul>
