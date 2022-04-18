@@ -5,6 +5,17 @@ h1 {
     text-align: center;
     border-bottom: double 3px;
 }
+h2 {
+    color: blue;
+    background: skyblue;
+}
+ul {
+    list-style-type: none;
+}
+/*li {*/
+/*    margin-bottom: 5px;*/
+/*    color: red;*/
+/*}*/
 .error {
     color: red;
 }

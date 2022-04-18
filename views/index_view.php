@@ -13,7 +13,7 @@
         <p>会員人数: <?= count($users) ?>人</p>
         <?php foreach($users as $user): ?>
         <ul>
-            <li><?= $user->name ?></li>
+            <li><a href="show.php"><?= $user->name ?></a></li>
             <li><?= $user->age ?>歳</li>
             <li><?= $user->gender === 'male' ? '男性' : '女性'?></li>
             <li><?= $user->drink() ?></li>
