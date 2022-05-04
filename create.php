@@ -10,7 +10,7 @@
     $user = $_SESSION['user'];
     $_SESSION['user'] = null;
     if($user === null){
-        $user = new User();
+        $user = new User('', '', 'male');
     }
     $token = session_id();
     // name = $_POST['name'];

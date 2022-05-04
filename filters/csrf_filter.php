@@ -7,6 +7,6 @@
         // var_dump($_POST);
         $token = $_POST['_token'];
         if($token !== session_id()){
-            header('Location: create.php');
+            header('Location: index.php');
             exit;
         }

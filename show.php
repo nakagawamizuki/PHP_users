@@ -1,5 +1,5 @@
 <?php
-    include_once 'models/User/php';
+    include_once 'models/User.php';
     session_start();
     
     $id = $_GET['id'];
